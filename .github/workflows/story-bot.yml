@@ -31,7 +31,6 @@ jobs:
         BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
         CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
         GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        FAL_API_KEY: ${{ secrets.FAL_API_KEY }}
       run: |
         python telegram_poster.py
     
