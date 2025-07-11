@@ -30,10 +30,10 @@ def load_config():
 config = load_config()
 
 # Get configuration from config.json or environment variables
-BOT_TOKEN = config.get("telegram", {}).get("bot_token") or os.getenv("BOT_TOKEN", "7493745933:AAF8WpI25Q4I04htDsyowSzrUYbgmee5OVk")
-CHANNEL_ID = config.get("telegram", {}).get("channel_id") or os.getenv("CHANNEL_ID", "-1002838702680")
-GEMINI_API_KEY = config.get("gemini", {}).get("api_key") or os.getenv("GEMINI_API_KEY", "AIzaSyD48NkpKNjhZZM8BMuIerON0hsvzPl91Mk")
-FAL_API_KEY = config.get("optional", {}).get("fal_api_key") or os.getenv("FAL_API_KEY", "cef62fb8-9a8c-443e-85cc-4f9805f6b853:25a71d66edc282c76dbb17dbe0712d29")
+BOT_TOKEN = config.get("telegram", {}).get("bot_token") or os.getenv("BOT_TOKEN")
+CHANNEL_ID = config.get("telegram", {}).get("channel_id") or os.getenv("CHANNEL_ID")
+GEMINI_API_KEY = config.get("gemini", {}).get("api_key") or os.getenv("GEMINI_API_KEY")
+FAL_API_KEY = config.get("optional", {}).get("fal_api_key") or os.getenv("FAL_API_KEY")
 
 # Story settings
 INITIAL_STORY_FILE = Path(__file__).parent / "initial_story.txt"
