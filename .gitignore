@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+env/
+venv/
+.env
+.venv
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+bot.log
+
+# Backups
+*_backup.*
+*.bak
+
+# Temporary files
+*.tmp
+*.temp
+
+# Config files with secrets
+config.json
+secrets.json 

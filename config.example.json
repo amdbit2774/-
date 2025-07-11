@@ -1,0 +1,16 @@
+{
+  "telegram": {
+    "bot_token": "YOUR_BOT_TOKEN_HERE",
+    "channel_id": "YOUR_CHANNEL_ID_HERE",
+    "update_bot_token": "YOUR_UPDATE_BOT_TOKEN_HERE"
+  },
+  "openai": {
+    "api_key_1": "YOUR_OPENAI_API_KEY_1_HERE",
+    "api_key_2": "YOUR_OPENAI_API_KEY_2_HERE"
+  },
+  "github": {
+    "username": "YOUR_GITHUB_USERNAME",
+    "email": "YOUR_GITHUB_EMAIL",
+    "token": "YOUR_GITHUB_TOKEN"
+  }
+} 

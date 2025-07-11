@@ -1,0 +1,44 @@
+name: Патриция Story Bot
+
+on:
+  schedule:
+    # Запуск каждые 2 часа
+    - cron: '0 */2 * * *'
+  workflow_dispatch:
+    # Возможность запуска вручную
+
+jobs:
+  run-story-step:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+    
+    - name: Run story step
+      env:
+        BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+        CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
+        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        FAL_API_KEY: ${{ secrets.FAL_API_KEY }}
+      run: |
+        python telegram_poster.py
+    
+    - name: Commit and push changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add story_state.json
+        git diff --staged --quiet || git commit -m "Update story state [$(date)]"
+        git push 
