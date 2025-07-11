@@ -14,11 +14,26 @@ import requests # <-- Add requests for image download
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # --- Configuration ---
-# Get configuration from environment variables or fallback to hardcoded values
-BOT_TOKEN = os.getenv("BOT_TOKEN", "7493745933:AAF8WpI25Q4I04htDsyowSzrUYbgmee5OVk")
-CHANNEL_ID = os.getenv("CHANNEL_ID", "-1002838702680")
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "AIzaSyD48NkpKNjhZZM8BMuIerON0hsvzPl91Mk")
-FAL_API_KEY = os.getenv("FAL_API_KEY", "cef62fb8-9a8c-443e-85cc-4f9805f6b853:25a71d66edc282c76dbb17dbe0712d29")
+# Load from config.json first, then environment variables
+def load_config():
+    config_file = Path(__file__).parent / "config.json"
+    if config_file.exists():
+        try:
+            with open(config_file, 'r', encoding='utf-8') as f:
+                config = json.load(f)
+                return config
+        except Exception as e:
+            logging.error(f"Error loading config.json: {e}")
+            return {}
+    return {}
+
+config = load_config()
+
+# Get configuration from config.json or environment variables
+BOT_TOKEN = config.get("telegram", {}).get("bot_token") or os.getenv("BOT_TOKEN", "7493745933:AAF8WpI25Q4I04htDsyowSzrUYbgmee5OVk")
+CHANNEL_ID = config.get("telegram", {}).get("channel_id") or os.getenv("CHANNEL_ID", "-1002838702680")
+GEMINI_API_KEY = config.get("gemini", {}).get("api_key") or os.getenv("GEMINI_API_KEY", "AIzaSyD48NkpKNjhZZM8BMuIerON0hsvzPl91Mk")
+FAL_API_KEY = config.get("optional", {}).get("fal_api_key") or os.getenv("FAL_API_KEY", "cef62fb8-9a8c-443e-85cc-4f9805f6b853:25a71d66edc282c76dbb17dbe0712d29")
 
 # Story settings
 INITIAL_STORY_FILE = Path(__file__).parent / "initial_story.txt"
